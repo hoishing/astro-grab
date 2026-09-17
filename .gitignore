@@ -80,7 +80,8 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+
+# Package dist is committed so GitHub installs work without a local build.
 
 # Gatsby files
 .cache/

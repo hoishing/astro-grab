@@ -53,11 +53,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/omniaura/astro-grab.git"
+    "url": "git+https://github.com/hoishing/astro-grab.git"
   },
-  "homepage": "https://github.com/omniaura/astro-grab",
+  "homepage": "https://github.com/hoishing/astro-grab",
   "bugs": {
-    "url": "https://github.com/omniaura/astro-grab/issues"
+    "url": "https://github.com/hoishing/astro-grab/issues"
   },
   "peerDependencies": {
     "astro": ">=4.0.0",
