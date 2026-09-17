@@ -109,6 +109,13 @@ export interface AstroGrabOptions {
    * @default 0
    */
   holdDuration?: number;
+
+  /**
+   * Maximum width of the hover location tooltip, in pixels.
+   * Sets `max-width` on `.astro-grab-tooltip`.
+   * @default 480
+   */
+  maxPopupWidth?: number;
 }
 
 // ── Astro integration options ────────────────────────────────────────
@@ -151,6 +158,13 @@ export interface AstroGrabIntegrationOptions {
    * @default 0
    */
   holdDuration?: number;
+
+  /**
+   * Maximum width of the hover location tooltip, in pixels.
+   * Passed through to the dev runtime bootstrap.
+   * @default 480
+   */
+  maxPopupWidth?: number;
 }
 
 // ── Vite plugin options (internal, used by integration) ──────────────
@@ -193,6 +207,13 @@ export interface AstroGrabViteOptions {
    * @default 0
    */
   holdDuration?: number;
+
+  /**
+   * Maximum width of the hover location tooltip, in pixels.
+   * Passed through to the dev runtime bootstrap.
+   * @default 480
+   */
+  maxPopupWidth?: number;
 }
 
 // ── Data attribute names ─────────────────────────────────────────────

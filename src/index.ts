@@ -8,7 +8,7 @@
  *   initAstroGrab({ key: "Alt", agentUrl: "ws://localhost:4567" });
  */
 
-import { Overlay } from "./overlay.js";
+import { Overlay, resolveMaxPopupWidth } from "./overlay.js";
 import { DEFAULT_ASTRO_GRAB_THEME, resolveTheme } from "./theme.js";
 import { inspect, findNearestSource, findNearestComponent, fetchSnippet, formatContext } from "./inspector.js";
 import { AgentBridge } from "./agent-bridge.js";
@@ -335,7 +335,7 @@ export function initAstroGrab(options: AstroGrabOptions = {}) {
 
   // Create state machine and overlay
   stateMachine = new StateMachine();
-  overlay = new Overlay(currentTheme);
+  overlay = new Overlay(currentTheme, resolveMaxPopupWidth(options.maxPopupWidth));
   overlay.connectStateMachine(stateMachine);
 
   // Wait for DOM to be ready

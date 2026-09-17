@@ -60,6 +60,7 @@ astroGrab({
   autoImport: true,        // Auto-import runtime in dev (default: true)
   key: "Alt",              // Modifier key: "Alt" | "Control" | "Meta" | "Shift"
   holdDuration: 0,         // ms to hold key before activation (default: 0 = instant)
+  maxPopupWidth: 480,      // hover tooltip max-width in px (default: 480)
   theme: {
     accent: "#bc52ee",     // Optional theme overrides
     surface: "#1a1a2e",
@@ -78,6 +79,7 @@ initAstroGrab({
   key: "Alt",              // Modifier key (default: "Alt")
   showToast: true,         // Show notification on copy (default: true)
   holdDuration: 0,         // ms to hold key before activation (default: 0 = instant)
+  maxPopupWidth: 480,      // hover tooltip max-width in px (default: 480)
   agentUrl: "ws://...",    // WebSocket URL for agent bridge (optional)
   onGrab: (context) => {}, // Callback, return false to prevent copy
   theme: {

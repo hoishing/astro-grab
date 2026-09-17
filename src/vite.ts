@@ -191,6 +191,7 @@ export default function astroGrabVite(
     key = "Alt",
     theme,
     holdDuration = 0,
+    maxPopupWidth,
   } = options;
 
   const resolvedTheme = resolveTheme(theme);
@@ -200,6 +201,12 @@ export default function astroGrabVite(
     holdDuration >= 0
       ? holdDuration
       : 0;
+  const resolvedMaxPopupWidth =
+    typeof maxPopupWidth === "number" &&
+    Number.isFinite(maxPopupWidth) &&
+    maxPopupWidth > 0
+      ? maxPopupWidth
+      : 480;
 
   let projectRoot = "";
 
@@ -218,7 +225,7 @@ export default function astroGrabVite(
 
     async load(id) {
       if (id === RESOLVED_VIRTUAL_INIT) {
-        return `import { initAstroGrab } from "@omniaura/astro-grab/client";\ninitAstroGrab({ key: ${JSON.stringify(key)}, theme: ${JSON.stringify(resolvedTheme)}, holdDuration: ${JSON.stringify(resolvedHoldDuration)} });`;
+        return `import { initAstroGrab } from "@omniaura/astro-grab/client";\ninitAstroGrab({ key: ${JSON.stringify(key)}, theme: ${JSON.stringify(resolvedTheme)}, holdDuration: ${JSON.stringify(resolvedHoldDuration)}, maxPopupWidth: ${JSON.stringify(resolvedMaxPopupWidth)} });`;
       }
 
       if (!id.endsWith(".astro") || id.includes("node_modules")) {

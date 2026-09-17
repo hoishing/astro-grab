@@ -10,9 +10,17 @@ import { resolveTheme } from "./theme.js";
 import type { StateMachine } from "./state-machine.js";
 import type { AstroGrabTheme, SourceLocation } from "./types.js";
 
+export const DEFAULT_MAX_POPUP_WIDTH = 480;
+
+export function resolveMaxPopupWidth(value?: number): number {
+  return typeof value === "number" && Number.isFinite(value) && value > 0
+    ? value
+    : DEFAULT_MAX_POPUP_WIDTH;
+}
+
 // ── Styles ───────────────────────────────────────────────────────────
 
-function createOverlayStyles(theme: AstroGrabTheme): string {
+function createOverlayStyles(theme: AstroGrabTheme, maxPopupWidth: number): string {
   return `
   .astro-grab-overlay {
     position: fixed;
@@ -37,7 +45,7 @@ function createOverlayStyles(theme: AstroGrabTheme): string {
     border-radius: 6px;
     border: 1px solid ${theme.border};
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    max-width: 480px;
+    max-width: ${maxPopupWidth}px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -149,10 +157,13 @@ export class Overlay {
   private lastHighlightRect: DOMRect | null = null;
   readonly theme: AstroGrabTheme;
 
-  constructor(theme?: Partial<AstroGrabTheme>) {
+  constructor(theme?: Partial<AstroGrabTheme>, maxPopupWidth?: number) {
     this.theme = resolveTheme(theme);
     this.styleEl = document.createElement("style");
-    this.styleEl.textContent = createOverlayStyles(this.theme);
+    this.styleEl.textContent = createOverlayStyles(
+      this.theme,
+      resolveMaxPopupWidth(maxPopupWidth)
+    );
 
     this.overlayEl = document.createElement("div");
     this.overlayEl.className = "astro-grab-overlay";

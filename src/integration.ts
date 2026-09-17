@@ -32,6 +32,7 @@ export default function astroGrab(
     key = "Alt",
     theme,
     holdDuration = 0,
+    maxPopupWidth,
   } = options;
 
   const resolvedTheme = resolveTheme(theme);
@@ -41,6 +42,12 @@ export default function astroGrab(
     holdDuration >= 0
       ? holdDuration
       : 0;
+  const resolvedMaxPopupWidth =
+    typeof maxPopupWidth === "number" &&
+    Number.isFinite(maxPopupWidth) &&
+    maxPopupWidth > 0
+      ? maxPopupWidth
+      : 480;
 
   return {
     name: "astro-grab",
@@ -63,6 +70,7 @@ export default function astroGrab(
               `const configuredKey = ${JSON.stringify(key)};`,
               `const configuredTheme = ${JSON.stringify(resolvedTheme)};`,
               `const configuredHoldDuration = ${JSON.stringify(resolvedHoldDuration)};`,
+              `const configuredMaxPopupWidth = ${JSON.stringify(resolvedMaxPopupWidth)};`,
               `const validKeys = new Set(["Alt", "Control", "Meta", "Shift"]);`,
               `const readToolbarConfig = () => {`,
               `  try {`,
@@ -78,7 +86,7 @@ export default function astroGrab(
               `const activationKey = validKeys.has(toolbarConfig?.key) ? toolbarConfig.key : configuredKey;`,
               `const storedHold = toolbarConfig?.holdDuration;`,
               `const holdDuration = (typeof storedHold === "number" && Number.isFinite(storedHold) && storedHold >= 0) ? storedHold : configuredHoldDuration;`,
-              `initAstroGrab({ key: activationKey, theme: configuredTheme, holdDuration: holdDuration });`,
+              `initAstroGrab({ key: activationKey, theme: configuredTheme, holdDuration: holdDuration, maxPopupWidth: configuredMaxPopupWidth });`,
               `if (toolbarConfig?.enabled === false) {`,
               `  const disable = () => {`,
               `    window.dispatchEvent(new CustomEvent("astro-grab:toggle", { detail: { enabled: false } }));`,
@@ -103,6 +111,7 @@ export default function astroGrab(
                 key,
                 theme: resolvedTheme,
                 holdDuration: resolvedHoldDuration,
+                maxPopupWidth: resolvedMaxPopupWidth,
               }),
             ],
           },
